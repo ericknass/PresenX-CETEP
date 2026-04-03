@@ -18,5 +18,10 @@ O **PresenX** é uma solução de sinalização digital desenvolvida especificam
 * `/data`: Base de dados das turmas (Matriz de horários).
 * `/js`: Motores de lógica, controle de tempo e integração.
 
+## 🔌 Hardware (IoT)
+O sistema utiliza um **ESP32** como terminal de coleta de dados, integrado com:
+* **MFRC522 (RFID):** Para identificação única de usuários via tags/cartões.
+* **LCD 16x2 I2C:** Para feedback visual imediato ao usuário.
+* **Comunicação HTTP:** O hardware consome uma API REST local para validação de presença e sincronização de horário.
 ---
 **Desenvolvido por Erick Nascimento** *Projeto focado em tecnologia assistiva e organização escolar.*
