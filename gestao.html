@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PresenX | Gestão</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/cetep.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">PX</div>
+      <div>
+        <div class="title">PresenX</div>
+        <div class="subtitle">Painel da Gestão</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center;">
+  <a href="./index.html" style="color: var(--text); text-decoration:none; font-weight:800; opacity:.85;">Aluno</a>
+<span style="opacity:.4;">|</span>
+<strong style="opacity:.95;">Gestão</strong>
+<!-- <span style="opacity:.4;">|</span>
+<a href="./turmas.html" style="color: var(--text); text-decoration:none; font-weight:800; opacity:.85;">Turmas</a> -->
+  <span style="opacity: .4;">|</span>
+      <a href="painel.html" style="color: var(--text); text-decoration: none;
+      font-weight: 800; opacity: .85;">Painel
+      </a>
+
+<button onclick="sair()" class="pill" style="cursor:pointer; font-weight:900; width:auto; padding:10px 14px;">
+  Sair
+</button>
+</div>
+
+    <div class="status">
+      <span class="dot" id="dot-status"></span>
+      <span id="text-status">Conectando...</span>
+    </div>
+  </header>
+
+  <main class="container" id="appGestao">
+    <section class="controls card">
+      <div class="row">
+        <div class="field">
+          <label for="filtroData">Data</label>
+          <input id="filtroData" type="date" />
+        </div>
+
+        <div class="field">
+          <label>Buscar</label>
+          <input id="searchInput" type="text" placeholder="Nome do professor..." />
+        </div>
+
+        <div class="field">
+          <label>Curso</label>
+          <select id="cursoSelect">
+            <option value="__todos__">Todos</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Ação</label>
+          <button id="btnExport" class="pill" style="cursor:pointer; font-weight:900;">
+            Exportar CSV
+          </button>
+        </div>
+
+        <div class="field">
+          <label>Atualização</label>
+          <div class="pill" id="lastUpdate">--:--:--</div>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpiLabel">Cadastrados (ativos)</div>
+          <div class="kpiValue" id="kpiCadastrados">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpiLabel">Presentes hoje</div>
+          <div class="kpiValue" id="kpiPresentes">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpiLabel">Ausentes hoje</div>
+          <div class="kpiValue" id="kpiAusentes">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpiLabel">Sem registro</div>
+          <div class="kpiValue" id="kpiSemRegistro">0</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="list" style="margin-top:18px;">
+  <div class="listHeader">
+    <h2>Gerenciar avisos</h2>
+    <div class="hint">Crie avisos para aparecer no painel do aluno</div>
+  </div>
+
+  <div class="card" style="padding:16px;">
+    <div class="row">
+      <div class="field">
+        <label for="avisoTitulo">Título</label>
+        <input id="avisoTitulo" type="text" placeholder="Ex: Professor ausente" />
+      </div>
+
+      <div class="field">
+        <label for="avisoCurso">Curso</label>
+        <select id="avisoCurso">
+          <option value="todos">Todos</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="avisoData">Data</label>
+        <input id="avisoData" type="date" />
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:12px;">
+      <div class="field" style="min-width:100%;">
+        <label for="avisoMensagem">Mensagem</label>
+        <input id="avisoMensagem" type="text" placeholder="Digite a mensagem do aviso..." />
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:12px;">
+      <div class="field checkbox">
+        <label>
+          <input id="avisoAtivo" type="checkbox" checked />
+          Aviso ativo
+        </label>
+      </div>
+
+      <div class="field">
+        <label>Ação</label>
+        <button id="btnSalvarAviso" class="pill" style="cursor:pointer; font-weight:900;">
+          Salvar aviso
+        </button>
+      </div>
+    </div>
+
+    <div id="msgAviso" style="margin-top:12px; font-weight:700;"></div>
+  </div>
+</section>
+
+  <section class="list" style="margin-top:18px;">
+  <div class="listHeader">
+    <h2>Avisos cadastrados</h2>
+    <div class="hint">Gerencie os avisos já criados</div>
+  </div>
+
+  <div id="listaAvisosGestao" class="avisos-list"></div>
+
+  <div id="avisosGestaoEmpty" class="empty card hidden">
+    <h3>Nenhum aviso cadastrado</h3>
+    <p>Os avisos criados aparecerão aqui.</p>
+  </div>
+</section>
+
+  <section class="list" style="margin-top:18px;">
+  <div class="listHeader">
+    <h2>Cadastrar professor</h2>
+    <div class="hint">Adicione ou atualize professores no sistema</div>
+  </div>
+
+  <div class="card" style="padding:16px; overflow: auto;">
+    <div class="row">
+      <div class="field">
+        <label for="cadUid">UID do cartão</label>
+        <input id="cadUid" type="text" placeholder="Ex: 336C58ED" />
+      </div>
+
+      <div class="field">
+        <label for="cadNome">Nome</label>
+        <input id="cadNome" type="text" placeholder="Nome do professor" />
+      </div>
+
+      <div class="field">
+        <label for="cadCurso">Curso</label>
+        <select id="cadCurso">
+          <option value="">Selecione</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:12px;">
+      <div class="field checkbox">
+        <label>
+          <input id="cadAtivo" type="checkbox" checked />
+          Professor ativo
+        </label>
+      </div>
+
+      <div class="field">
+        <label>Ação</label>
+        <button id="btnSalvarProfessor" class="pill" style="cursor:pointer; font-weight:900;">
+          Salvar professor
+        </button>
+      </div>
+    </div>
+
+    <div id="msgProfessor" style="margin-top:12px; font-weight:700;"></div>
+  </div>
+</section>
+
+    <section class="list" style="margin-top:18px;">
+      <div class="listHeader">
+        <h2>Lista completa (hoje)</h2>
+        <div class="hint">Mostra todos os professores ativos, mesmo sem registro.</div>
+      </div>
+
+      <div class="card" style="padding:12px; overflow:auto;">
+        <table class="tabela-gestao">
+          <thead>
+           <tr style="text-align:left; color: var(--muted); font-size:12px;">
+             <th class="col-prof">Professor</th>
+             <th class="col-curso">Curso</th>
+             <th class="col-status">Status</th>
+             <th class="col-hora">Entrada</th>
+             <th class="col-hora">Saída</th>
+             <th class="col-uid">UID</th>
+           </tr>
+          </thead>
+          <tbody id="tbody" style="font-size:13px;"></tbody>
+        </table>
+
+        <div id="empty" class="empty hidden" style="box-shadow:none; margin-top:12px;">
+          <h3>Nenhum resultado</h3>
+          <p>Tente limpar a busca ou trocar o filtro.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>PresenX • Gestão</span>
+  </footer>
+
+  <script src="./gestao.js"></script>
+  
+<script>
+  window.sair = function () {
+    window.location.href = "./login-gestao.html";
+  };
+</script>
+</body>
+</html>

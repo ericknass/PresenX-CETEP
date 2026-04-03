@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PresenX | Painel de Presença</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/cetep.css" />
+
+  <!-- Firebase RTDB (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="bg"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">PX</div>
+      <div>
+        <div class="title">PresenX</div>
+        <div class="subtitle">Painel de presença em tempo real</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px;align-items: center;">
+      <strong
+      style="opacity: .95;">Aluno</strong>
+      <span style="opacity: .4;">|</span>
+      <a href="./gestao.html" style="color: var(--text);
+      text-decoration: none;
+      font-weight: 800; opacity: .85;">
+        Gestão
+      </a>
+     <!--<span style="opacity: .4;">|</span>
+     <a href="turmas.html" style="color: var(--text); text-decoration: none; font-weight: 800; opacity: .85;">Turmas</a>-->
+      <span style="opacity: .4;">|</span>
+      <a href="painel.html" style="color: var(--text); text-decoration: none;
+      font-weight: 800; opacity: .85;">Painel
+      </a>
+    </div>
+
+    <div class="status">
+      <span class="dot" id="dot-status"></span>
+      <span id="text-status">Conectando...</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="controls card">
+      <div class="row">
+        <div class="field">
+          <label for="cursoSelect">Curso</label>
+          <select id="cursoSelect">
+            <option value="__todos__">Todos</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="searchInput">Buscar professor</label>
+          <input id="searchInput" type="text" placeholder="Digite o nome..." />
+        </div>
+
+        <div class="field checkbox">
+          <label>
+            <input id="showAbsent" type="checkbox" />
+            Mostrar ausentes
+          </label>
+        </div>
+
+        <div class="field">
+          <label>Hoje</label>
+          <div class="pill" id="todayLabel">--/--/----</div>
+        </div>
+
+        <div class="field">
+          <label>Atualização</label>
+          <div class="pill" id="lastUpdate">--:--:--</div>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpiLabel">Presentes</div>
+          <div class="kpiValue" id="kpiPresentes">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpiLabel">Exibidos</div>
+          <div class="kpiValue" id="kpiExibidos">0</div>
+        </div>
+      </div>
+    </section>
+
+<section class="list" id="avisosSection">
+  <div class="listHeader">
+    <h2>Avisos</h2>
+    <div class="hint">Informações importantes da gestão</div>
+  </div>
+
+  <div id="avisosContainer" class="avisos-list"></div>
+
+  <div id="avisosEmpty" class="empty card hidden">
+    <h3>Nenhum aviso</h3>
+    <p>Não há avisos ativos para hoje.</p>
+  </div>
+</section>
+
+    <section class="list">
+      <div class="listHeader">
+        <h2 id="listTitle">Professores presentes</h2>
+        <div class="hint">Dica: filtre por curso e use busca para achar rápido.</div>
+      </div>
+
+      <div id="grid" class="grid">
+        <!-- cards -->
+      </div>
+
+      <div id="empty" class="empty card hidden">
+        <h3>Nenhum resultado</h3>
+        <p>Tente trocar o curso, desmarcar “Mostrar ausentes” ou limpar a busca.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>PresenX • CETEP/LNAB</span>
+  </footer>
+
+  <script src="./cetep.js"></script>
+</body>
+</html>

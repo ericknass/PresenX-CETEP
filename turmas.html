@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PresenX | Turmas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/cetep.css" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">PX</div>
+      <div>
+        <div class="title">PresenX</div>
+        <div class="subtitle">Painel de turmas e horários</div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      <a href="./index.html" style="color: var(--text); text-decoration:none; font-weight:800; opacity:.85;">Aluno</a>
+      <span style="opacity:.4;">|</span>
+      <a href="./gestao.html" style="color: var(--text); text-decoration:none; font-weight:800; opacity:.85;">Gestão</a>
+      <span style="opacity:.4;">|</span>
+      <strong style="opacity:.95;">Turmas</strong>
+        <span style="opacity: .4;">|</span>
+      <a href="painel.html" style="color: var(--text); text-decoration: none;
+      font-weight: 800; opacity: .85;">Painel
+      </a>
+    </div>
+
+
+    <div class="status">
+      <span class="dot" id="dot-status"></span>
+      <span id="text-status">Conectando...</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="painel-turmas-topo card">
+      <div class="painel-turmas-esq">
+        <div id="diaSemanaGrande" class="painel-dia">
+          Segunda-feira
+        </div>
+        <div id="horarioGrande" class="painel-horario">
+          1º horário
+        </div>
+      </div>
+
+      <div class="painel-turmas-dir">
+        <div class="painel-pill" id="todayLabel">--/--/----</div>
+        <div class="painel-pill" id="horaAtualLabel">--:--:--</div>
+      </div>
+    </section>
+
+    <section class="list" style="margin-top:18px;">
+      <div id="gridTurmas" class="grade-turmas"></div>
+
+      <div id="emptyTurmas" class="empty card hidden">
+        <h3>Nenhum resultado</h3>
+        <p>Verifique filtros, horários ou cadastros.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>PresenX • Turmas</span>
+  </footer>
+
+  <script src="./turnos.js"></script>
+  <script src="./turmas_matutino.js"></script>
+  <script src="./turmas_vespertino.js"></script>
+  <script src="./turmas_noturno.js"></script>
+  <script src="./turmas.js"></script>
+</body>
+</html>

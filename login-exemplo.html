@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PresenX | Login Gestão</title>
+  <link rel="stylesheet" href="./css/cetep.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">PX</div>
+      <div>
+        <div class="title">PresenX</div>
+        <div class="subtitle">Login da Gestão</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card" style="padding:18px; max-width:520px; margin:18px auto;">
+      <h2 style="margin:0 0 10px 0;">Acesso restrito</h2>
+      <p style="margin:0 0 14px 0; color: var(--muted);">
+        Entre com o email e senha do administrador.
+      </p>
+
+      <div class="row">
+        <div class="field" style="min-width:100%;">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="seuemail@gmail.com" />
+        </div>
+
+        <div class="field" style="min-width:100%;">
+          <label for="senha">Senha</label>
+          <input id="senha" type="password" placeholder="********" />
+        </div>
+
+        <div class="field" style="min-width:100%;">
+          <button id="btnLogin" class="pill" style="cursor:pointer; font-weight:900;">
+            Entrar
+          </button>
+        </div>
+
+
+        <div id="msgErro" style="color:#ff6b6b; font-weight:700;"></div>
+
+        <div class="field" style="min-width:100%;">
+          <a href="./index.html" style="color: var(--text); opacity:.85; font-weight:800; text-decoration:none;">
+            Voltar ao painel do aluno
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "SUA_API_KEY_AQUI",
+    authDomain: "seu-projeto.firebaseapp.com",
+    databaseURL: "https://seu-projeto.firebaseio.com",
+    projectId: "seu-projeto",
+    storageBucket: "seu-projeto.appspot.com",
+    messagingSenderId: "0000000000",
+    appId: "1:0000000000:web:0000000000"
+  };
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+
+  const btnLogin = document.getElementById("btnLogin");
+  const msgErro = document.getElementById("msgErro");
+
+  btnLogin.addEventListener("click", async () => {
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value.trim();
+
+    msgErro.textContent = "";
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, senha);
+      window.location.replace("./gestao.html");
+    } catch (error) {
+      console.error(error);
+      msgErro.textContent = "Email ou senha inválidos.";
+    }
+  });
+</script>
+</body>
+</html>

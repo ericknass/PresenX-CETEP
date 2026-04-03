@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PresenX | Painel</title>
+
+    <link rel="stylesheet" href="./css/painel.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+</head>
+
+<body>
+    <main class="painel-root">
+        <section class="painel-topo">
+            <div class="painel-topo-esq">
+                <div id="painelDia" class="painel-dia">Segunda-feira</div>
+                <div class="painel-linha-inferior">
+                    <div class="painel-info-linha">
+                        <div id="painelHorario" class="painel-chip">1º horário</div>
+                        <div id="painelTurno" class="painel-chip">Matutino</div>
+                        <div id="painelData" class="painel-chip">--/--/----</div>
+                        <div id="painelHoraAtual" class="painel-chip">--:--:--</div>
+                    </div>
+                    <div class="painel-legenda">
+                        <div class="legenda-item"><span class="legenda-cor verde"></span><span>Presente</span></div>
+                        <div class="legenda-item"><span class="legenda-cor vermelho"></span><span>Ausente</span></div>
+                        <div class="legenda-item"><span class="legenda-cor cinza"></span><span>Sem aula</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="painel-topo-dir">
+                <div class="colegio-identidade">
+                    <span class="nome-principal">CETEP</span>
+                    <span class="nome-separador">/</span>
+                    <span class="nome-unidade">LNAB</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="painel-grade-wrap">
+            <div id="painelGrade" class="painel-grade"></div>
+            <div id="painelVazio" class="painel-vazio" style="display:none;">
+                Nenhuma turma para exibir no momento
+            </div>
+        </section>
+
+        <div class="painel-rodape">
+            <span id="painelPagina">Página 1/1</span>
+        </div>
+    </main>
+
+    <script src="./js/turnos.js"></script>
+    <script src="./data/turmas_matutino.js"></script>
+    <script src="./data/turmas_vespertino.js"></script>
+    <script src="./data/turmas_noturno.js"></script>
+    <script src="./js/painel.js"></script>
+</body>
+</html>
