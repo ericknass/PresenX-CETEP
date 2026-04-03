@@ -22,7 +22,6 @@ O **PresenX** é um ecossistema de automação escolar desenvolvido para o **CET
 * **Hardware (IoT):** * Microcontrolador ESP32.
     * Leitor RFID MFRC522 via protocolo SPI.
     * Display LCD 16x2 via protocolo I2C.
-
 ---
 
 ## 📐 Como o Sistema Funciona
