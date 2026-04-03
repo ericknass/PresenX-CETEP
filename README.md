@@ -1,21 +1,22 @@
-# 🚀 PresenX - Painel Escolar Inteligente
+# 🚀 PresenX - Sistema de Painel Dinâmico (CETEP/LNAB)
 
-O **PresenX** é um sistema de sinalização digital desenvolvido para o **CETEP/LNAB** em Alagoinhas-BA. Ele automatiza a exibição de horários, turnos e status de professores em tempo real.
+O **PresenX** é uma solução de sinalização digital desenvolvida especificamente para o **CETEP/LNAB**. O sistema automatiza a exibição de horários, turmas e status de presença dos professores, eliminando a necessidade de atualizações manuais e quadros físicos.
 
-## 🛠️ Tecnologias Utilizadas
-* **HTML5** (Estrutura modular)
-* **CSS3** (Design Responsivo e Glassmorphism)
-* **JavaScript Puro** (Lógica de horários e manipulação de DOM)
+## ✨ Principais Funcionalidades
+* **Troca Automática de Turnos:** O sistema identifica o horário local e exibe as turmas do Matutino, Vespertino ou Noturno automaticamente.
+* **Carrossel Inteligente:** Suporte para exibição de múltiplas páginas de turmas em ciclos de tempo configuráveis.
+* **Dashboard de Gestão:** Interface administrativa (Firebase) para atualização de status em tempo real.
+* **Design Otimizado:** Interface desenvolvida com foco em legibilidade para TVs e monitores de grandes formatos.
 
-## 📁 Estrutura do Projeto
-* `/css`: Estilização e identidade visual.
-* `/js`: Motores de lógica e tempo.
-* `/data`: Estrutura de dados das turmas e horários.
+## 🛠️ Tecnologias
+* **Frontend:** HTML5, CSS3 (Modern UI/UX) e JavaScript (Vanilla).
+* **Backend & Database:** Firebase Realtime Database & Auth.
+* **Arquitetura:** Organização modular de arquivos para fácil manutenção.
 
-## 📌 Funcionalidades
-* Identificação automática de turno e horário.
-* Sistema de carrossel para múltiplas turmas.
-* Interface otimizada para TVs de alta definição.
+## 📁 Estrutura de Pastas
+* `/css`: Arquivos de estilização e identidade visual.
+* `/data`: Base de dados das turmas (Matriz de horários).
+* `/js`: Motores de lógica, controle de tempo e integração.
 
 ---
-Desenvolvido por Erick Nascimento - 2026
+**Desenvolvido por Erick Nascimento** *Projeto focado em tecnologia assistiva e organização escolar.*
