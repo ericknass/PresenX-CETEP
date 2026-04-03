@@ -24,4 +24,4 @@ O sistema utiliza um **ESP32** como terminal de coleta de dados, integrado com:
 * **LCD 16x2 I2C:** Para feedback visual imediato ao usuário.
 * **Comunicação HTTP:** O hardware consome uma API REST local para validação de presença e sincronização de horário.
 ---
-**Desenvolvido por Erick Nascimento** *Projeto focado em tecnologia assistiva e organização escolar.*
+**Desenvolvido por Erick Nascimento** - *Projeto focado em tecnologia assistiva e organização escolar.*
